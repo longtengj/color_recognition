@@ -16,7 +16,6 @@ from color_recognition_api import knn_classifier as knn_classifier
 
 
 def color_histogram_of_test_image(test_src_image):
-
     # load the image
     image = test_src_image
 
@@ -48,7 +47,6 @@ def color_histogram_of_test_image(test_src_image):
 
 
 def color_histogram_of_training_image(img_name):
-
     # detect image color by using image file name to label training data
     if 'red' in img_name:
         data_source = 'red'
@@ -97,7 +95,6 @@ def color_histogram_of_training_image(img_name):
 
 
 def training():
-
     # red color training images
     for f in os.listdir('./training_dataset/red'):
         color_histogram_of_training_image('./training_dataset/red/' + f)
@@ -124,4 +121,4 @@ def training():
 
     # blue color training images
     for f in os.listdir('./training_dataset/blue'):
-        color_histogram_of_training_image('./training_dataset/blue/' + f)		
+        color_histogram_of_training_image('./training_dataset/blue/' + f)

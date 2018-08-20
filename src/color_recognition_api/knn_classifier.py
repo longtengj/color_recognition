@@ -27,7 +27,7 @@ def kNearestNeighbors(training_feature_vector, testInstance, k):
     length = len(testInstance) - 1
     for x in range(len(training_feature_vector)):
         dist = calculateEuclideanDistance(testInstance,
-                training_feature_vector[x], length)
+                                          training_feature_vector[x], length)
         distances.append((training_feature_vector[x], dist))
     distances.sort(key=operator.itemgetter(1))
     neighbors = []
@@ -52,11 +52,11 @@ def responseOfNeighbors(neighbors):
 
 # Load image feature data to training feature vectors and test feature vector
 def loadDataset(
-    filename,
-    filename2,
-    training_feature_vector=[],
-    test_feature_vector=[],
-    ):
+        filename,
+        filename2,
+        training_feature_vector=[],
+        test_feature_vector=[],
+):
     with open(filename) as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
@@ -84,4 +84,4 @@ def main(training_data, test_data):
         neighbors = kNearestNeighbors(training_feature_vector, test_feature_vector[x], k)
         result = responseOfNeighbors(neighbors)
         classifier_prediction.append(result)
-    return classifier_prediction[0]		
+    return classifier_prediction[0]
