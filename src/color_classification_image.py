@@ -5,15 +5,15 @@
 # --- Mail           : ahmetozlu93@gmail.com
 # --- Date           : 8th July 2018 - before Google inside look 2018 :)
 # -------------------------------------------------------------------------
+import colorsys
 import imghdr
 
 import cv2
+from PIL import Image
 from color_recognition_api import color_histogram_feature_extraction
 from color_recognition_api import knn_classifier
 import os
 import os.path
-import skimage.io as io
-from skimage import data_dir
 
 
 def rotate(
@@ -53,16 +53,6 @@ def rotate(
 # cv2.imshow('color classifier', source_image)
 # cv2.waitKey(0)
 
-def cutimage(dir, suffix):
-    for root, dirs, files in os.walk(dir):
-        for file in files:
-            filepath = os.path.join(root, file)
-            filesuffix = os.path.splitext(filepath)[1][1:]
-            if filesuffix in suffix:  # 遍历找到指定后缀的文件名["jpg",png]等
-                image = cv2.imread(file)  # opencv剪切图片
-                rotate(image)
-
-
 def eachFile(filepath):
     list = []
     pathDir = os.listdir(filepath)
@@ -72,15 +62,43 @@ def eachFile(filepath):
     return list
 
 
+def get_dominant_color(image):
+    max_score = 0.0001
+    dominant_color = None
+    for count, (r, g, b) in image.getcolors(image.size[0] * image.size[1]):
+        # 转为HSV标准
+        saturation = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)[1]
+        y = min(abs(r * 2104 + g * 4130 + b * 802 + 4096 + 131072) >> 13, 235)
+        y = (y - 16.0) / (235 - 16)
+
+        # 忽略高亮色
+        if y > 0.9:
+            continue
+        score = (saturation + 0.1) * count
+        if score > max_score:
+            max_score = score
+            dominant_color = (r, g, b)
+    return dominant_color
+
+
 def picResize():
     files = eachFile(filePath)
     for file in files:
         if imghdr.what(file) in ('bmp', 'jpg', 'png', 'jpeg'):  # 判断图片的格式
-            # img = cv2.imread(file)  # 读取图片
-            rotate(file)
+            img = cv2.imread(file)  # 读取图片
+            print(file.title())
+            # rotate(file)
+            image = Image.open(file)
+            image = image.convert('RGB')
+            r, g, b = get_dominant_color(image)
+            val = hex(b + ((g << 8) & 0xff00) + ((r << 16) & 0xff0000))
+            print(val)
+            resultRootdir = "./segment/"
+            if not cv2.os.path.isdir(resultRootdir):
+                cv2.os.makedirs(resultRootdir)
+            cv2.imwrite(resultRootdir + str(val) + ".jpg", img)
 
 
 if __name__ == '__main__':
     filePath = r".\segment\\"
     picResize()
-
