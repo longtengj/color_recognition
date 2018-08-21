@@ -107,7 +107,6 @@ for i in range(0, len(contours)):
                 if j == 1:
                     # if i % 3 == 1:
                     temp = str(i) + str(j)
-                    # region.save("E:/color/segment/" + temp + ".png")
                     region.save("./segment/" + temp + ".png")
 
 cv2.waitKey(0)
