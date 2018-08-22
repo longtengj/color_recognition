@@ -80,6 +80,38 @@ def get_dominant_color(image):
             dominant_color = (r, g, b)
     return dominant_color
 
+# def cutPic():
+#     image = image.convert('RGB')
+#     image = Image.open(file)
+#     img_array = image.load()
+#     r, l, n = img.shape
+#     print(r, l, n)
+#     print(img_array[l / 10, r / 2])
+#     print(img_array[l / 2, r / 2])
+#     print(img_array[l * 9 / 10, r / 2])
+#     img_ = cv2.imread(file)
+#     originh, originw = img_.shape[:2]  # 获取图像的高和宽
+#     gray = cv2.cvtColor(img_, cv2.COLOR_BGR2GRAY)  # 转成灰度图像
+#     ret, binary = cv2.threshold(gray, 100, 180, cv2.THRESH_BINARY)  # 将灰度图像转成二值图像
+#
+#     _, _contours, _hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # 查找轮廓
+#     cv2.drawContours(img_, _contours, -1, (0, 0, 255), 3)
+#     cv2.imshow("img", img_)
+#     for i in range(0, len(_contours)):
+#         x, y, w, h = cv2.boundingRect(_contours[i])
+#         # cv2.rectangle(img, (x, y), (x + w, y + h), (153, 153, 0), 5)
+#         # newimage = origin[y + 10:y + h - 5, x + 10:x + w - 5]  # 先用y确定高，再用x确定宽
+#         newimage = img[y:y + h, x:x + w]  # 先用y确定高，再用x确定宽
+#         nh, nw = newimage.shape[:2]  # 获取图像的高和宽
+#         # if nw < originw:
+#
+#         resultRootdir = "./segment/cut/"
+#         if not cv2.os.path.isdir(resultRootdir):
+#             cv2.os.makedirs(resultRootdir)
+#         cv2.imwrite(resultRootdir + str(i) + ".jpg", newimage)
+#         # cv2.waitKey(0)
+#         # cv2.destroyAllWindows()
+
 
 def picResize():
     files = eachFile(filePath)
@@ -87,16 +119,15 @@ def picResize():
         if imghdr.what(file) in ('bmp', 'jpg', 'png', 'jpeg'):  # 判断图片的格式
             img = cv2.imread(file)  # 读取图片
             print(file.title())
-            # rotate(file)
-            image = Image.open(file)
-            image = image.convert('RGB')
-            r, g, b = get_dominant_color(image)
-            val = hex(b + ((g << 8) & 0xff00) + ((r << 16) & 0xff0000))
-            print(val)
-            resultRootdir = "./segment/"
-            if not cv2.os.path.isdir(resultRootdir):
-                cv2.os.makedirs(resultRootdir)
-            cv2.imwrite(resultRootdir + str(val) + ".jpg", img)
+            rotate(file)
+
+            # r, g, b = get_dominant_color(image)
+            # val = hex(b + ((g << 8) & 0xff00) + ((r << 16) & 0xff0000))
+            # print(val)
+            # resultRootdir = "./segment/"
+            # if not cv2.os.path.isdir(resultRootdir):
+            #     cv2.os.makedirs(resultRootdir)
+            # cv2.imwrite(resultRootdir + str(val) + ".jpg", img)
 
 
 if __name__ == '__main__':
