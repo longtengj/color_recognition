@@ -68,6 +68,7 @@ for i in range(0, len(contours)):
         yy = 3
         x = nw // xx
         y = nh // yy
+        index = 0
         for j in range(yy):
             for i in range(xx):
                 left = i * x
@@ -78,15 +79,12 @@ for i in range(0, len(contours)):
 
                 # if j == 1:
                 if i % 4 == 1 and j == 1:
-
                     # print((left, up, right, low))
-                    temp = str(i) + str(j)
-                    file = "./segment/" + temp + ".png"
+                    file = "./segment/" + str(index) + ".png"
+                    index = index + 1
                     print(file)
 
                     region.save(file)
-
-
 
                     # _image = Image.open(file)
                     # _image = _image.convert('RGB')
