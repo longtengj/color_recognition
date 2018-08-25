@@ -83,6 +83,7 @@ def get_dominant_color(image):
 
 def picResize():
     files = eachFile(filePath)
+    i = 0
     for file in files:
         if imghdr.what(file) in ('bmp', 'jpg', 'png', 'jpeg'):  # 判断图片的格式
             img = cv2.imread(file)  # 读取图片
@@ -97,6 +98,7 @@ def picResize():
             if not cv2.os.path.isdir(resultRootdir):
                 cv2.os.makedirs(resultRootdir)
             cv2.imwrite(resultRootdir + str(val) + ".jpg", img)
+            i = i + 1
 
 
 if __name__ == '__main__':
