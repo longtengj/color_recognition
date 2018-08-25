@@ -12,7 +12,7 @@ import math
 import operator
 import cv2
 
-
+# 计算欧几里德距离
 # calculation of euclidead distance
 def calculateEuclideanDistance(variable1, variable2, length):
     distance = 0
@@ -20,7 +20,7 @@ def calculateEuclideanDistance(variable1, variable2, length):
         distance += pow(variable1[x] - variable2[x], 2)
     return math.sqrt(distance)
 
-
+# K近邻。训练点的近邻的K个点，K由用户指定
 # get k nearest neigbors
 def kNearestNeighbors(training_feature_vector, testInstance, k):
     distances = []
@@ -35,7 +35,7 @@ def kNearestNeighbors(training_feature_vector, testInstance, k):
         neighbors.append(distances[x][0])
     return neighbors
 
-
+# 近邻投票
 # votes of neighbors
 def responseOfNeighbors(neighbors):
     all_possible_neighbors = {}

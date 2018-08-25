@@ -10,6 +10,8 @@ from PIL import Image
 import os
 import cv2
 import numpy as np
+
+
 # import matplotlib.pyplot as plt
 # from scipy.stats import itemfreq
 # from color_recognition_api import knn_classifier as knn_classifier
@@ -18,7 +20,7 @@ import numpy as np
 def color_histogram_of_test_image(test_src_image):
     # load the image
     image = test_src_image
-
+    # 拆分成BGR三个通道
     chans = cv2.split(image)
     colors = ('b', 'g', 'r')
     features = []
@@ -26,7 +28,7 @@ def color_histogram_of_test_image(test_src_image):
     counter = 0
     for (chan, color) in zip(chans, colors):
         counter = counter + 1
-
+        # 通道B的直方图
         hist = cv2.calcHist([chan], [0], None, [256], [0, 256])
         features.extend(hist)
 
@@ -40,7 +42,7 @@ def color_histogram_of_test_image(test_src_image):
         elif counter == 3:
             red = str(elem)
             feature_data = red + ',' + green + ',' + blue
-            # print(feature_data)
+            print(feature_data)
 
     with open('test.data', 'w') as myfile:
         myfile.write(feature_data)
@@ -122,3 +124,83 @@ def training():
     # blue color training images
     for f in os.listdir('./training_dataset/blue'):
         color_histogram_of_training_image('./training_dataset/blue/' + f)
+
+    # 白细胞 阴性 color training images
+    for f in os.listdir('./training_leukocytes_dataset/-'):
+        color_histogram_of_training_image('./training_leukocytes_dataset/-/' + f)
+    # 白细胞 微量 color training images
+    for f in os.listdir('./training_leukocytes_dataset/+-'):
+        color_histogram_of_training_image('./training_leukocytes_dataset/+-/' + f)
+    # 白细胞 少量 color training images
+    for f in os.listdir('./training_leukocytes_dataset/+'):
+        color_histogram_of_training_image('./training_leukocytes_dataset/+/' + f)
+    # 白细胞 中量 color training images
+    for f in os.listdir('./training_leukocytes_dataset/++'):
+        color_histogram_of_training_image('./training_leukocytes_dataset/++/' + f)
+    # 白细胞 大量 color training images
+    for f in os.listdir('./training_leukocytes_dataset/+++'):
+        color_histogram_of_training_image('./training_leukocytes_dataset/+++/' + f)
+
+    # 亚硝酸盐 阴性 color training images
+    for f in os.listdir('./training_nitirite_dataset/-'):
+        color_histogram_of_training_image('./training_nitirite_dataset/-/' + f)
+    # 亚硝酸盐 少量 color training images
+    for f in os.listdir('./training_nitirite_dataset/+'):
+        color_histogram_of_training_image('./training_nitirite_dataset/+/' + f)
+    # 亚硝酸盐 中量 color training images
+    for f in os.listdir('./training_nitirite_dataset/++'):
+        color_histogram_of_training_image('./training_nitirite_dataset/++/' + f)
+
+    # PH 50 color training images
+    for f in os.listdir('./training_ph_dataset/50'):
+        color_histogram_of_training_image('./training_ph_dataset/50/' + f)
+    # PH 60 color training images
+    for f in os.listdir('./training_ph_dataset/60'):
+        color_histogram_of_training_image('./training_ph_dataset/60/' + f)
+    # PH 70 color training images
+    for f in os.listdir('./training_ph_dataset/70'):
+        color_histogram_of_training_image('./training_ph_dataset/70/' + f)
+    # PH 75 color training images
+    for f in os.listdir('./training_ph_dataset/75'):
+        color_histogram_of_training_image('./training_ph_dataset/75/' + f)
+    # PH 80 color training images
+    for f in os.listdir('./training_ph_dataset/80'):
+        color_histogram_of_training_image('./training_ph_dataset/80/' + f)
+    # PH 85 color training images
+    for f in os.listdir('./training_ph_dataset/85'):
+        color_histogram_of_training_image('./training_ph_dataset/85/' + f)
+
+    # 尿胆原 0.2阴性 color training images
+    for f in os.listdir('./training_urobllinogen_dataset/02-'):
+        color_histogram_of_training_image('./training_urobllinogen_dataset/02-/' + f)
+    # 尿胆原 1阴性 color training images
+    for f in os.listdir('./training_urobllinogen_dataset/1-'):
+        color_histogram_of_training_image('./training_urobllinogen_dataset/1-/' + f)
+    # 尿胆原 2阳性 color training images
+    for f in os.listdir('./training_urobllinogen_dataset/2+'):
+        color_histogram_of_training_image('./training_urobllinogen_dataset/2+/' + f)
+    # 尿胆原 4阳性 color training images
+    for f in os.listdir('./training_urobllinogen_dataset/4++'):
+        color_histogram_of_training_image('./training_urobllinogen_dataset/4++/' + f)
+    # 尿胆原 8阳性 color training images
+    for f in os.listdir('./training_urobllinogen_dataset/8+++'):
+        color_histogram_of_training_image('./training_urobllinogen_dataset/8+++/' + f)
+
+    # 蛋白质 阴性 color training images
+    for f in os.listdir('./training_protein_dataset/-'):
+        color_histogram_of_training_image('./training_protein_dataset/-/' + f)
+    # 蛋白质 微量 color training images
+    for f in os.listdir('./training_protein_dataset/+-'):
+        color_histogram_of_training_image('./training_protein_dataset/+-/' + f)
+    # 蛋白质 30阳性 color training images
+    for f in os.listdir('./training_protein_dataset/30+'):
+        color_histogram_of_training_image('./training_protein_dataset/30+/' + f)
+    # 蛋白质 100阳性 color training images
+    for f in os.listdir('./training_protein_dataset/100++'):
+        color_histogram_of_training_image('./training_protein_dataset/1++/' + f)
+    # 蛋白质 300阳性 color training images
+    for f in os.listdir('./training_protein_dataset/300+++'):
+        color_histogram_of_training_image('./training_protein_dataset/300+++/' + f)
+    # 蛋白质 >2000阳性 color training images
+    for f in os.listdir('./training_protein_dataset/2000++++'):
+        color_histogram_of_training_image('./training_protein_dataset/2000++++/' + f)
