@@ -27,9 +27,10 @@ Key 's' - To save the results
 ===============================================================================
 '''
 
-import numpy as np
-import cv2
 import sys
+
+import cv2
+import numpy as np
 
 # BLUE = [255, 0, 0]  # rectangle color
 BLUE = [255, 255, 255]  # rectangle color
@@ -72,7 +73,7 @@ def onmouse(event, x, y, flags, param):
         rectangle = False
         rect_over = True
         cv2.rectangle(img, (ix, iy), (x, y), BLUE, 2)
-        rect = (ix+2, iy+2, abs(ix - x)-2, abs(iy - y)-2)
+        rect = (ix + 2, iy + 2, abs(ix - x) - 2, abs(iy - y) - 2)
         rect_or_mask = 0
         print
         " Now press the key 'n' a few times until no further change \n"
