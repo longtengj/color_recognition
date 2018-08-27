@@ -11,7 +11,6 @@ import os
 import os.path
 
 import cv2
-from PIL import Image
 from color_recognition_api import color_histogram_feature_extraction
 from color_recognition_api import knn_classifier
 

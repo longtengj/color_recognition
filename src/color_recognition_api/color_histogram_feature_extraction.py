@@ -35,6 +35,10 @@ def color_histogram_of_test_image(test_src_image):
         hist = cv2.calcHist([chan], [0], None, [256], [0, 256])
         features.extend(hist)
 
+        # plt.plot(hist, color=color)
+        # plt.xlim([0, 256])
+        # plt.show()
+
         # find the peak pixel values for R, G, and B
         elem = np.argmax(hist)
 
