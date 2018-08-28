@@ -109,9 +109,7 @@ def foreach_picture(train_datas):
 
 train_datas = ['training_leukocytes.data', 'training_nitirite.data',
                'training_urobllinogen.data', 'training_protein.data',
-               'training_ph.data', 'training_leukocytes.data', 'training_nitirite.data',
-               'training_urobllinogen.data', 'training_protein.data',
-               'training_ph.data', 'training_ph.data']
+               'training_ph.data']
 
 if __name__ == '__main__':
     filePath = r".\segment\\"

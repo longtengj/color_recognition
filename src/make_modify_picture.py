@@ -20,16 +20,16 @@ def make_picture(
     # r = image[:, :, 2]
     # print(b, g, r)
     # B
-    image[:, :, 0] = 53
+    image[:, :, 0] = 104
     # G
-    image[:, :, 1] = 99
+    image[:, :, 1] = 60
     # R
-    image[:, :, 2] = 33
-    cv2.imwrite("./training_protein_dataset/2000p4/" + "2000p4.png", image)
+    image[:, :, 2] = 77
+    cv2.imwrite("./training_leukocytes_dataset/p3/" + "p33.png", image)
 
 
 # filename = './training_leukocytes_dataset/-/2000p4.png'
-filename = './training_protein_dataset/2000p4/2000p4.png'
+filename = './training_leukocytes_dataset/p3/p3.png'
 
 if __name__ == '__main__':
     make_picture(filename)

@@ -12,7 +12,7 @@ from color_recognition_api import knn_classifier
 import os
 import os.path
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 (ret, frame) = cap.read()
 prediction = 'n.a.'
 
